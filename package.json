@@ -10,6 +10,7 @@
     "typescript": "^4.4.2"
   },
   "scripts": {
+    "build": "tsc",
     "test": "jest --config jestconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",

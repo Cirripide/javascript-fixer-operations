@@ -1,5 +1,22 @@
 {
+  "name": "javascript-fixer-operations",
+  "version": "1.0.0",
+  "description": "A library to correct javascript miscalculations",
+  "main": "index.js",
   "devDependencies": {
     "typescript": "^4.4.2"
-  }
+  },
+  "scripts": {
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cirripide/javascript-fixer-operations.git"
+  },
+  "keywords": ["Miscalculations", "Operations"],
+  "author": "J. Donvito"
 }

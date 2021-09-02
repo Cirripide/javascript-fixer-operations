@@ -1,6 +1,6 @@
-export class JsOperation {
+export default class JsOperation {
     // Addition method
-    public addition(values: number[]): number {
+    public addition(...values: number[]): number {
         const decimals = this.maxDecimal(this.decimalOperandsArray(values));
         if (decimals)
             return values.reduce((a, b) => a + Math.round((b * Math.pow(10, decimals))), 0) / Math.pow(10, decimals);
@@ -8,7 +8,7 @@ export class JsOperation {
     }
 
     // subtraction method
-    public subtraction(values: number[]): number {
+    public subtraction(...values: number[]): number {
         const decimals = this.maxDecimal(this.decimalOperandsArray(values));
         if (decimals)
             return values.reduce((a, b, index) => {
@@ -20,7 +20,7 @@ export class JsOperation {
     }
 
     // Multiplication method
-    public multiplication(values: number[]): number {
+    public multiplication(...values: number[]): number {
         const decimals = this.maxDecimal(this.decimalOperandsArray(values));
         let i = 0;
         if (decimals)
@@ -34,7 +34,7 @@ export class JsOperation {
     }
 
     // Division method
-    public division(values: number[]): number {
+    public division(...values: number[]): number {
         let decimals = this.maxDecimal(this.decimalOperandsArray(values));
         if (decimals)
             return values.reduce((a, b, index) => {

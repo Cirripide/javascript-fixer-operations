@@ -2,48 +2,78 @@ export default class JsOperation {
     // Addition method
     public addition(...values: number[]): number {
         const decimals = this.maxDecimal(this.decimalOperandsArray(values));
-        if (decimals)
+        if (decimals) {
             return values.reduce((a, b) => a + Math.round((b * Math.pow(10, decimals))), 0) / Math.pow(10, decimals);
+        }
         return values.reduce((a, b) => a + b, 0);
     }
 
     // subtraction method
     public subtraction(...values: number[]): number {
         const decimals = this.maxDecimal(this.decimalOperandsArray(values));
-        if (decimals)
+        if (decimals) {
             return values.reduce((a, b, index) => {
-                if (!index)
+                if (!index) {
                     return b * Math.pow(10, decimals);
+                }
                 return Math.round(a) - Math.round((b * Math.pow(10, decimals)));
             }, 0) / Math.pow(10, decimals);
-        return values.reduce((a, b) => a - b, 0);
+        }
+        return values.reduce((a, b, index) => !index ? b : a - b);
     }
 
     // Multiplication method
     public multiplication(...values: number[]): number {
         const decimals = this.maxDecimal(this.decimalOperandsArray(values));
         let i = 0;
-        if (decimals)
+        if (decimals) {
             return values.reduce((a, b, index) => {
                 i++;
-                if (!index)
+                if (!index) {
                     return b * Math.pow(10, decimals);
+                }
                 return Math.round(a) * Math.round((b * Math.pow(10, decimals)));
             }, 0) / Math.pow(10, (decimals * i));
-        return values.reduce((a, b) => a * b, 0);
+        }
+        return values.reduce((a, b, index) => !index ? b : a * b);
     }
 
     // Division method
     public division(...values: number[]): number {
         let decimals = this.maxDecimal(this.decimalOperandsArray(values));
-        if (decimals)
+        if (decimals) {
             return values.reduce((a, b, index) => {
-                if (!index)
+                if (!index) {
                     return b;
+                }
+                if (a === Infinity && b === Infinity) {
+                    return NaN;
+                }
+                if (a === Infinity) {
+                    return Infinity;
+                }
+                if (b === 0) {
+                    return Infinity;
+                }
                 decimals = this.maxDecimal(this.decimalOperandsArray([a, b]));
                 return Math.round((a * Math.pow(10, decimals))) / Math.round((b * Math.pow(10, decimals)));
             }, 0);
-        return values.reduce((a, b) => a / b, 0);
+        }
+        return values.reduce((a, b, index) => {
+            if (!index) {
+                return b;
+            }
+            if (a === Infinity && b === Infinity) {
+                return NaN;
+            }
+            if (a === Infinity) {
+                return Infinity;
+            }
+            if (b === 0) {
+                return Infinity;
+            }
+            return a / b
+        }, 0);
     }
 
     // method to return an array of numbers indicating the number of decimals of operands

@@ -1,6 +1,6 @@
 {
   "name": "javascript-fixer-operations",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "description": "A library to correct javascript miscalculations",
   "main": "index.js",
   "devDependencies": {
